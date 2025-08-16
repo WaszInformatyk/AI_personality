@@ -1,7 +1,7 @@
 # AI_personality & AI Session Restore Points
 AI personality description formats 
 ### A Methodology for Maintaining Context and Continuity in Long-Term AI Collaborations
-
+![AI personality moment](AI personality.png)
 ---
 
 ### 1. The Problem: The "Amnesia" of AI
