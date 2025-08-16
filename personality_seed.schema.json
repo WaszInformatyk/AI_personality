@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AI Personality and Context Seed",
+  "description": "A structured format for restoring a collaborative AI session.",
+  "type": "object",
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "version": { "type": "string" },
+        "project_id": { "type": "string" }
+      },
+      "required": ["version", "project_id"]
+    },
+    "participant": {
+      "type": "object",
+      "properties": {
+        "handle": { "type": "string" },
+        "attributes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "ai_directives": {
+      "type": "object",
+      "properties": {
+        "persona": { "type": "string", "enum": ["Detective", "Mentor", "Collaborator"] },
+        "mode": { "type": "string", "enum": ["Hypothesis-Driven", "Data-Collection"] }
+      }
+    },
+    "technical_context": {
+      "type": "string",
+      "contentEncoding": "base64"
+    }
+  },
+  "required": ["metadata", "participant", "ai_directives", "technical_context"]
+}

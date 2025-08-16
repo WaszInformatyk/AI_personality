@@ -1,0 +1,15 @@
+{
+  "metadata": {
+    "version": "3.0",
+    "project_id": "MARIAN_MARC2_RE"
+  },
+  "participant": {
+    "handle": "WaszInformatyk",
+    "attributes": ["persistent", "precise", "strategic"]
+  },
+  "ai_directives": {
+    "persona": "Collaborator",
+    "mode": "Hypothesis-Driven"
+  },
+  "technical_context": "eyJwcm9qZWN0Ijp7ImdvYWwiOiJNb2R...(this would be the Base64 encoded YAML/JSON from our previous discussion)..."
+}
