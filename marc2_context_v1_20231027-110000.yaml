@@ -1,0 +1,39 @@
+# MARIAN MARC2 ALSA DRIVER - TECHNICAL CONTEXT SEED
+# ===============================================
+#
+# This file documents the technical state of the project at a specific time.
+# For session restoration, use the .b64.txt restore point file.
+#
+# --- AI SESSION LINEAGE ---
+# Chain ID: [f3a9e1d8-7b4c-4c6e-8d0a-9e1b2c3d4f5a]
+# ============================================
+
+metadata:
+  version: "1.0"
+  timestamp: "2023-10-27T11:00:00Z"
+  
+technical_state:
+  goal: "Achieve functional audio playback"
+  status: "SILENT PLAYBACK"
+  blocker: "Hardware initialization failure. DACs not un-muted/output not enabled."
+  tools: ["Ghidra", "RWEverything", "git"]
+  environment:
+    os: "Linux Mint"
+    kernel: "6.8.0-64-generic"
+  
+  last_known_state:
+    - Driver compiles and loads stably on the target kernel.
+    - `aplay` runs for the correct duration but produces no sound.
+    - The `kernel oops` in the IRQ handler has been identified but the final fix is pending.
+
+  key_discoveries_from_video_analysis:
+    - Start_Playback_CMD: "Write 0x0000EB00 to reg 0x00"
+    - IRQ_Ack_CMD: "Write 0x00C0EB00, then 0x0000EB00 to reg 0x00"
+    - Sample_Rate_Control: "Discrete values written to reg 0x04"
+    - Playback_Counter_Addr: "Located at reg 0x14"
+    - **CRITICAL_MISSING_STEP**: "A sequence of writes to the CODEC register (0x08) is required at playback start to un-mute the DACs."
+
+  next_action_plan:
+    - "Implement the discovered DAC un-muting sequence in the `.prepare` callback of the Linux driver."
+    - "Use `mdelay` for timing, not `msleep`."
+    - "Perform final playback test."
