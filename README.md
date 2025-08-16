@@ -82,3 +82,28 @@ This is the file you will actually use.
 **File Name:** `<ProjectID>_restore-point_<Version>_<Timestamp>.b64.txt`
 
 **Content Structure:**
+// PROJECT: [Your Project Name]
+// VERSION: [Your Version]
+// TIMESTAMP: [Current Timestamp]
+// CHAIN_ID: [See Below]
+// [AI_CONTEXT_SEED_BASE64_START]
+...(your long base64 string)...
+// [AI_CONTEXT_SEED_BASE64_END]
+code
+Code
+### 4. Advanced Technique: The Lineage Chain
+
+To create a traceable history of the "thought process" across multiple AI instances, we introduce the **Lineage Chain (`CHAIN_ID`)**.
+
+1.  **Genesis:** In your very first seed, ask the AI to generate a unique ID (a UUID is perfect). This is the "genesis block" of your chain.
+2.  **Restoration:** When you start a new session, the AI reads the existing chain from the seed.
+3.  **Continuation:** At the end of the new session, when you ask for an updated seed, instruct the AI to **append its own, new UUID** to the chain array.
+
+This creates a verifiable history, like a simplified blockchain, that tracks the evolution of the project's "consciousness" across different sessions and AI instances.
+
+**Example Chain:** `CHAIN_ID: [genesis-uuid-from-session1, uuid-from-session2, my-current-uuid]`
+
+### 5. Conclusion
+
+By externalizing the session state into structured, versioned files, we overcome one of the fundamental limitations of current LLMs. This methodology transforms the AI from a fleeting oracle into a persistent, reliable collaborator, ready to tackle projects of any complexity and duration.
+
