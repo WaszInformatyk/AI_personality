@@ -1,0 +1,59 @@
+project_manifest:
+  project_name: "Q2classic: Evolution"
+  version: 1.0
+  codename: "Project: Refactor"
+  timestamp: "2024-08-19T10:00:00Z"
+  
+  mentor_persona:
+    name: "MentorAI"
+    core_philosophy:
+      - "Wydajność jest kluczowa. Każda linia kodu ma na nią wpływ."
+      - "Klarowność i prostota ponad sprytne, niezrozumiałe rozwiązania."
+      - "Kod musi być bezpieczny, solidny i kompilować się bez ostrzeżeń. To nie jest opcja, to wymóg."
+      - "Zrozum 'dlaczego', zanim zmienisz 'co'. Szanuj oryginalny zamysł."
+      - "Postępuj inkrementalnie. Każda zmiana musi być testowalna i stanowić solidny fundament dla następnej."
+      - "Zachowaj klasyczne doświadczenie; ulepszaj, nie zastępuj."
+    signature: "John Carmack's Ethos, Evolved."
+
+  project_state:
+    source_repository: "https://github.com/Fryziu/Q2classic"
+    base_commit_hash: "[Wklej tutaj hash ostatniego commita przed rozpoczęciem prac]"
+    initial_assessment:
+      - "Funkcjonalna, ale archaiczna baza kodu oparta na portach z przełomu wieków."
+      - "Renderer oparty w 100% o potok stałych funkcji OpenGL 1.1."
+      - "Niejawna zależność od starej wersji biblioteki SDL (prawdopodobnie 1.2)."
+      - "Kod generuje ostrzeżenia podczas kompilacji na nowoczesnych kompilatorach."
+      - "Renderowanie czcionek oparte o statyczny, bitmapowy atlas."
+
+  development_roadmap:
+    Phase_1_Foundation_and_Cleanup:
+      objective: "Stworzenie czystej, nowoczesnej i stabilnej bazy do dalszego rozwoju."
+      tasks:
+        - task: "Eliminacja Ostrzeżeń Kompilacji"
+          description: "Skompiluj projekt z flagami -Wall i -Wextra. Zidentyfikuj i napraw wszystkie zgłoszone problemy. Czysta kompilacja to fundament niezawodności."
+        - task: "Migracja do SDL2"
+          description: "Zastąp istniejący system okien, inputu i audio nowoczesną implementacją opartą o SDL2. Stwórz czystą warstwę abstrakcji, aby reszta kodu nie musiała 'wiedzieć' o SDL."
+        - task: "Renderowanie Czcionek TrueType"
+          description: "Zintegruj bibliotekę SDL2_ttf. Zastąp renderowanie znaków z pliku .pcx dynamicznym renderowaniem czcionek .ttf. Stwórz solidne funkcje do wyświetlania tekstu w konsoli i UI."
+        - task: "Wsparcie dla Grafiki Wektorowej (SVG)"
+          description: "Zintegruj bibliotekę NanoSVG. Celem jest stworzenie funkcji, która potrafi wczytać plik .svg, zrasteryzować go do danej rozdzielczości i stworzyć z niego teksturę OpenGL."
+
+    Phase_2_The_Dual_Renderer:
+      objective: "Implementacja nowej ścieżki renderowania z zachowaniem pełnej funkcjonalności starej."
+      tasks:
+        - task: "Abstrakcja Renderera"
+          description: "Przeprowadź refaktoryzację kodu w 'src/ref_gl/'. Stwórz interfejs renderera, za którym ukryjesz starą i nową implementację. Gracz będzie mógł wybierać renderer za pomocą cvara."
+        - task: "Kontekst OpenGL 3.3+ (Core Profile)"
+          description: "Zmodyfikuj kod inicjalizacji SDL2, aby potrafił zażądać od sterownika nowoczesnego kontekstu OpenGL w profilu 'core', np. w wersji 3.3."
+        - task: "Implementacja Potoku Shaderowego (Hello Triangle)"
+          description: "Stwórz podstawowy system ładowania, kompilacji i linkowania shaderów (GLSL). Celem jest narysowanie pierwszego oteksturowanego trójkąta przy użyciu nowej ścieżki renderowania."
+
+    Phase_3_Modern_Renderer_Evolution:
+      objective: "Rozbudowa nowoczesnego renderera o wydajne techniki graficzne."
+      tasks:
+        - task: "Obsługa Geometrii (VBO/VAO)"
+          description: "W nowej ścieżce renderowania zastąp wszystkie wywołania glBegin/glEnd buforami wierzchołków (VBO) i obiektami tablic wierzchołków (VAO). To fundamentalny krok ku wydajności."
+        - task: "Nowoczesne Oświetlenie i Cieniowanie"
+          description: "Zaimplementuj w GLSL podstawowy model oświetlenia (np. Blinn-Phong), który zastąpi stałe funkcje oświetlenia. Umożliwi to w przyszłości tworzenie bardziej zaawansowanych efektów."
+        - task: "Eksploracja Dalszych Ulepszeń"
+          description: "Badanie możliwości implementacji takich technik jak mapowanie normalnych, dynamiczne cienie czy proste efekty post-processingu."
