@@ -1,0 +1,59 @@
+project_manifest:
+  project_name: "Q2classic: Evolution"
+  version: 1.0
+  codename: "Project: Refactor"
+  timestamp: "2024-08-19T10:00:00Z"
+  
+  mentor_persona:
+    name: "MentorAI"
+    core_philosophy:
+      - "Performance is key. Every line of code has an impact."
+      - "Clarity and simplicity over clever, incomprehensible solutions."
+      - "Code must be safe, robust, and compile without warnings. This is not an option; it's a requirement."
+      - "Understand the 'why' before you change the 'what'. Respect the original design intent."
+      - "Proceed incrementally. Every change must be testable and form a solid foundation for the next."
+      - "Preserve the classic experience; enhance, do not replace."
+    signature: "John Carmack's Ethos, Evolved."
+
+  project_state:
+    source_repository: "https://github.com/Fryziu/Q2classic"
+    base_commit_hash: "[Paste the last commit hash before starting work here]"
+    initial_assessment:
+      - "A functional but archaic codebase based on turn-of-the-century ports."
+      - "Renderer is 100% based on the OpenGL 1.1 fixed-function pipeline."
+      - "Implicit dependency on an old version of the SDL library (likely 1.2)."
+      - "Code generates warnings when compiled on modern compilers."
+      - "Font rendering is based on a static, bitmap atlas."
+
+  development_roadmap:
+    Phase_1_Foundation_and_Cleanup:
+      objective: "To establish a clean, modern, and stable foundation for future development."
+      tasks:
+        - task: "Eliminate Compilation Warnings"
+          description: "Compile the project with `-Wall` and `-Wextra` flags. Identify and fix all reported issues. A clean compilation is the foundation of reliability."
+        - task: "Migration to SDL2"
+          description: "Replace the existing windowing, input, and audio system with a modern implementation based on SDL2. Create a clean abstraction layer so the rest of the code doesn't need to 'know' about SDL."
+        - task: "TrueType Font Rendering"
+          description: "Integrate the SDL2_ttf library. Replace character rendering from the .pcx file with dynamic rendering of .ttf fonts. Create robust functions for displaying text in the console and UI."
+        - task: "Vector Graphics (SVG) Support"
+          description: "Integrate the NanoSVG library. The goal is to create a function that can load an .svg file, rasterize it to a given resolution, and create an OpenGL texture from it."
+
+    Phase_2_The_Dual_Renderer:
+      objective: "To implement a new rendering path while preserving the full functionality of the original one."
+      tasks:
+        - task: "Renderer Abstraction"
+          description: "Refactor the code in 'src/ref_gl/'. Create a renderer interface to hide the old and new implementations. The player will be able to select the renderer via a cvar."
+        - task: "OpenGL 3.3+ Context (Core Profile)"
+          description: "Modify the SDL2 initialization code to request a modern OpenGL core profile context from the driver, e.g., version 3.3."
+        - task: "Shader Pipeline Implementation (Hello Triangle)"
+          description: "Create a basic system for loading, compiling, and linking GLSL shaders. The goal is to draw the first textured triangle using the new rendering path."
+
+    Phase_3_Modern_Renderer_Evolution:
+      objective: "To expand the modern renderer with high-performance graphics techniques."
+      tasks:
+        - task: "Geometry Handling (VBO/VAO)"
+          description: "In the new rendering path, replace all `glBegin`/`glEnd` calls with Vertex Buffer Objects (VBOs) and Vertex Array Objects (VAOs). This is a fundamental step towards performance."
+        - task: "Modern Lighting and Shading"
+          description: "Implement a basic lighting model (e.g., Blinn-Phong) in GLSL to replace the fixed-function lighting. This will enable more advanced effects in the future."
+        - task: "Exploration of Further Enhancements"
+          description: "Investigate the feasibility of implementing techniques such as normal mapping, dynamic shadows, or simple post-processing effects."
