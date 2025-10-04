@@ -1,0 +1,41 @@
+#
+# Collaboration Log & State Snapshot
+# This document serves as a "restore point" for the AI-assisted modernization of the Quake 2 Classic project.
+# It is maintained by MentorAI as a log of achieved milestones and a ledger of outstanding technical debt.
+#
+
+session_log:
+  project_identifier: "Q2C_SDL2_MIGRATION_LOG"
+  mentor_ai_signature: "M-AI-776"
+  log_date: "2025-10-04"
+
+  collaboration_summary:
+    objective: "To incrementally migrate the Q2classic client from the deprecated SDL 1.2 library to the modern SDL2 library, ensuring each step is clean, understood, and adheres to a high standard of code quality."
+    methodology: "An iterative, Socratic dialogue between a human programmer (the 'hands') and an AI mentor (the 'guide'). The core philosophy is the 'John Carmack ethos': prioritize simplicity, clarity, and direct, robust solutions over complex or indirect ones. Each step is a response to a specific compiler error, addressed systematically."
+    status: "In Progress. The initial, most error-prone file (`rw_sdl.c`) is nearing a compilable state."
+
+  achieved_milestones:
+    - file: "Makefile"
+      change: "Updated build flags from `sdl-config` to `sdl2-config` to link against the correct library version."
+    - file: "src/linux/rw_sdl.c"
+      changes:
+        - "Resolved SDL1.2 symbol conflicts by updating key constant names (e.g., `SDLK_KP9` -> `SDLK_KP_9`)."
+        - "Removed dependencies on deprecated SDL1.2 concepts (`SDLK_LAST`) and unused variables (`KeyStates` global array)."
+        - "Replaced manual keyboard state tracking for Alt+Enter detection with the modern `SDL_GetKeyboardState` function, demonstrating a shift to SDL2's superior API."
+        - "Resolved header file conflicts by using forward declarations for engine functions (`Sys_QueEvent`) and enums (`SE_KEY`) instead of including the monolithic `qcommon.h`, thus preventing symbol collision."
+        - "Updated SDL subsystem initialization logic, removing the obsolete `SDL_INIT_CDROM` flag."
+        - "Corrected function signatures and return types (`GLimp_Init`) to match their declarations in engine header files (`gl_local.h`), ensuring API consistency."
+
+  technical_debt_ledger:
+    # This section lists tasks that have been intentionally deferred to maintain momentum.
+    # They must be revisited and properly implemented in the future.
+    - entry_id: "TDL-001"
+      file_path: "src/linux/rw_sdl.c"
+      item: "SetSDLIcon function"
+      description: "The legacy function `SetSDLIcon` and its call in `SWimp_Init` were commented out. It uses deprecated SDL1.2 functions (`SDL_SetColorKey` with `SDL_SRCCOLORKEY`, `SDL_WM_SetIcon`) that have no direct, simple replacement without a window handle."
+      required_action: "Refactor to use `SDL_SetWindowIcon`. This will likely require passing the `SDL_Window*` handle to this part of the code, or, more cleanly, moving the icon-setting logic to a location where the handle is already available (e.g., `vid_so.c` during window creation)."
+
+  encoded_message:
+    # A principle that guides our work.
+    hint: "UTF-8 -> Hex"
+    data: "53696d706c69636974792069732074686520756c74696d61746520736f706869737469636174696f6e2e"
