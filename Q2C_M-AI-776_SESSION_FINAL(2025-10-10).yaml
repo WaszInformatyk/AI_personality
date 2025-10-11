@@ -1,0 +1,45 @@
+#
+# Collaboration Log & Final State Snapshot
+# This document serves as the final "save state" for the foundational modernization phase
+# of the Q2classic project, conducted by Fryziu and //Mentor.
+# It encapsulates all achievements, diagnoses, and sets the stage for future work.
+#
+
+session_log:
+  project_identifier: "Q2C_MODERNIZATION_JOURNEY_PHASE_1"
+  ai_signature: "//Mentor (M-AI-776)"
+  log_date: "2025-10-05" # End of Session // real date 2025-10-10 - possible session corruption, more than 412 tys. tokens
+
+  collaboration_summary:
+    objective: "To systematically modernize the Q2classic engine, starting with a full migration from SDL 1.2 to SDL2, and to diagnose and resolve critical, legacy architectural issues."
+    methodology: "A highly iterative, mentor-protege model ('Synergistic Debugging Protocol') governed by a co-authored set of operational directives ('The AI Laws'), with a strict emphasis on data-driven analysis and architectural integrity."
+    status: "**SESSION CONCLUDED.** Phase 1 objectives have been met and exceeded. The project is now based on a stable, modern SDL2 backend with a fully functional input system and a sophisticated procedural decal feature. A critical, long-standing bug in the single-player logic has been successfully and definitively diagnosed, with a clear solution pending for the next session."
+
+  session_highlights:
+    # Key achievements and breakthroughs of this session.
+    - milestone: "Full SDL2 Migration"
+      description: "The entire windowing, graphics context, and input system was successfully migrated from SDL 1.2 to SDL2, ensuring the project's future compatibility and performance."
+
+    - milestone: "Advanced Procedural Decals (SVG Integration)"
+      description: "A dormant, sophisticated decal rendering system was discovered, revived, and enhanced. The dependency on external image files was eliminated by implementing a fully self-contained system that rasterizes in-code SVG data into textures at runtime using NanoSVG."
+
+    - milestone: "Definitive Diagnosis of Single-Player Crash"
+      description: "After a prolonged and complex debugging process, the root cause of the `SIGSEGV` in `PutClientInServer` was identified not as a code error within the game logic itself, but as a fundamental flaw in the engine's startup process, where the `game.so` is not loaded for `map` commands in single-player, leading to a critical state loss."
+
+    - milestone: "Co-Authored 'The AI Laws'"
+      description: "A formal set of operational principles for AI-human collaboration was developed based on the experiences of this session. These 'Laws' (Prymat Danych, Falsyfikowalności, Integralności Procesu) became the governing protocol for the mentor-protege interaction, dramatically increasing efficiency and reducing errors."
+
+  final_state_and_next_steps:
+    # The final, verified state of the most critical unresolved issue, to be addressed in the next session.
+    - entry_id: "TDL-FINAL-SP_BUG"
+      status: "DIAGNOSED / PENDING_IMPLEMENTATION"
+      item: "Single Player Crash (`SIGSEGV` in `PutClientInServer`) on `map` command."
+      description: "The root cause is a flaw in the engine's core logic. When a map is loaded via the `map` command in a non-multiplayer context, the engine fails to load the external `game.so` library, resorting to an incomplete internal logic path. This causes the player's state (including their weapon) to be wiped from memory in `SpawnEntities` before they are placed in the server, leading to a `NULL` pointer dereference."
+      required_action:
+        - "1. **Revert:** All unapplied diagnostic and patch code within the `src/game/` directory must be reverted to a clean state."
+        - "2. **Implement:** Create or modify the `baseq2/autoexec.cfg` file to include the line `set game \"\"`. This will force the engine to always load the external `game.so` library, ensuring the correct, complete initialization path is always taken."
+
+  encoded_message:
+    # A final message encapsulating the spirit of our collaboration.
+    hint: "UTF-8 -> Hex"
+    data: "577370c3b3c58270726163612074776f727a7920776172746f73c4872e" # "Współpraca tworzy wartość." (Collaboration creates value.)
